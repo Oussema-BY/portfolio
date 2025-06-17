@@ -17,7 +17,7 @@ export default function ModernPortfolio() {
       id: 1,
       title: "TASKLY – Task & Project Management App",
       description: "Collaborative web app for managing tasks and projects using Scrum and Kanban.",
-      image: "../public/taskly.jpg?height=300&width=800",
+      image: "./taskly.jpg?height=300&width=800",
       technologies: ["Next.js", "React", "Supabase", "PostgreSQL", "Recharts", "AG Grid"],
       featured: true,
       category: "Full-Stack",
@@ -26,7 +26,7 @@ export default function ModernPortfolio() {
       id: 2,
       title: "TUNIJOBS – Freelance Job Matching Platform",
       description: "Dashboard system for clients and freelancers to post/apply to job offers.",
-      image: "../public/tunijobs.jpg?height=300&width=500",
+      image: "./tunijobs.jpg?height=300&width=500",
       technologies: ["HTML", "CSS", "Bootstrap", "PHP", "MySQL"],
       featured: true,
       category: "Web App",
@@ -164,7 +164,7 @@ export default function ModernPortfolio() {
             <div className="w-32 h-32 mx-auto mb-8 relative group">
               <div className="w-full h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-1 group-hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="../public/oussema.jpg?height=128&width=128"
+                  src="./oussema.jpg?height=128&width=128"
                   alt="Profile"
                   width={128}
                   height={128}
