@@ -1,11 +1,17 @@
+"use client";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail, ExternalLink, MapPin, Phone, ArrowRight, Star, Users, Coffee } from "lucide-react"
+import { Github, Linkedin, Mail, MapPin, Phone, ArrowRight, Star, Menu, X, Code, Zap, Heart, Target } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import * as React from "react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export default function ModernPortfolio() {
+  const isMobile = useIsMobile()
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+
   const projects = [
     {
       id: 1,
@@ -38,6 +44,55 @@ export default function ModernPortfolio() {
     { name: "Supabase", level: 90, category: "Database" },
   ]
 
+  const achievements = [
+    {
+      icon: <Code className="w-6 h-6" />,
+      number: "10+",
+      label: "Projects Completed",
+      description: "From concept to deployment"
+    },
+    {
+      icon: <Zap className="w-6 h-6" />,
+      number: "8",
+      label: "Technologies Mastered",
+      description: "Modern web stack expertise"
+    },
+    {
+      icon: <Heart className="w-6 h-6" />,
+      number: "100%",
+      label: "Passion Driven",
+      description: "Love what I do"
+    },
+    {
+      icon: <Target className="w-6 h-6" />,
+      number: "24/7",
+      label: "Problem Solver",
+      description: "Always ready for challenges"
+    }
+  ]
+
+  const navItems = [
+    { href: "#home", label: "Home" },
+    { href: "#about", label: "About" },
+    { href: "#projects", label: "Projects" },
+    { href: "#contact", label: "Contact" },
+  ]
+
+  const handleNavClick = () => {
+    setMobileMenuOpen(false)
+  }
+
+  React.useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [mobileMenuOpen])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       {/* Navigation */}
@@ -47,35 +102,55 @@ export default function ModernPortfolio() {
             <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Oussema Ben Yahia
             </div>
-            <div className="hidden md:flex space-x-8">
-              <Link
-                href="#home"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+            
+            {/* Desktop Navigation */}
+            {!isMobile && (
+              <div className="flex space-x-8">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            {/* Mobile Menu Button */}
+            {isMobile && (
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
               >
-                Home
-              </Link>
-              <Link
-                href="#about"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-              >
-                About
-              </Link>
-              <Link
-                href="#projects"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-              >
-                Projects
-              </Link>
-              <Link
-                href="#contact"
-                className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-              >
-                Contact
-              </Link>
-            </div>
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </Button>
+            )}
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobile && mobileMenuOpen && (
+            <div className="absolute top-full left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-white/20 dark:border-slate-700/50 shadow-lg">
+              <div className="px-6 py-4 space-y-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={handleNavClick}
+                    className="block text-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 py-2"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </nav>
+
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         {/* Animated background elements */}
@@ -89,7 +164,7 @@ export default function ModernPortfolio() {
             <div className="w-32 h-32 mx-auto mb-8 relative group">
               <div className="w-full h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-1 group-hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="/placeholder.svg?height=128&width=128"
+                  src="/d2300 p45.jpg?height=128&width=128"
                   alt="Profile"
                   width={128}
                   height={128}
@@ -102,7 +177,7 @@ export default function ModernPortfolio() {
 
           <div className="space-y-6 mb-12">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
-              <span className="block text-slate-800 dark:text-white mb-2">Hi, I'm</span>
+              <span className="block text-slate-800 dark:text-white mb-2">Hi, I&rsquo;m</span>
               <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Oussema Ben Yahia
               </span>
@@ -112,38 +187,18 @@ export default function ModernPortfolio() {
               Software Engineering Student & Full-Stack Developer crafting exceptional digital experiences with modern
               technologies
             </p>
-
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-              <div className="flex items-center gap-2">
-                <Star className="w-4 h-4 text-yellow-500" />
-                <span>5+ Years Experience</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-blue-500" />
-                <span>50+ Happy Clients</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Coffee className="w-4 h-4 text-orange-500" />
-                <span>100+ Projects Delivered</span>
-              </div>
-            </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              View My Work
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105"
+            onClick={() => window.open('/resume.pdf', '_blank')}
             >
               Download Resume
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
+           
           </div>
 
           <div className="flex justify-center space-x-6">
@@ -153,7 +208,7 @@ export default function ModernPortfolio() {
               className="w-12 h-12 rounded-full bg-white/10 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-slate-700/50 transition-all duration-300 hover:scale-110"
               asChild
             >
-              <Link href="https://github.com" target="_blank">
+              <Link href="https://github.com/Oussema-BY" target="_blank">
                 <Github className="w-5 h-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
@@ -184,58 +239,93 @@ export default function ModernPortfolio() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-24 px-6 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 dark:text-white mb-6">About Me</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
-            <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-              Passionate about creating digital solutions that make a difference
+      {/* Enhanced About Section */}
+      <section id="about" className="py-32 px-6 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm relative overflow-hidden">
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-tr from-purple-400/10 to-pink-600/10 rounded-full blur-2xl"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-20">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-6">
+              <Star className="w-4 h-4 text-blue-500 mr-2" />
+              <span className="text-sm font-medium text-blue-600 dark:text-blue-400">About Me</span>
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold text-slate-800 dark:text-white mb-6 leading-tight">
+              Crafting Digital
+              <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Experiences
+              </span>
+            </h2>
+            <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8"></div>
+            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
+              Passionate about creating digital solutions that make a difference in people&rsquo;s lives
             </p>
           </div>
-
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <div className="prose prose-lg dark:prose-invert">
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                  I'm a software engineering student with hands-on experience building modern web applications through academic and personal projects.
-                  I specialize in technologies like React, Next.js, and Supabase, with a focus on delivering clean code and intuitive user experiences.
-                </p>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                  My journey into tech began with a strong curiosity about digital systems, which led me to study computer science and dive into web development. 
-                  I enjoy solving real-world problems and continuously expanding my skill set through challenging and meaningful projects.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-6">
-                <Card className="p-6 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">100+</div>
-                    <div className="text-slate-600 dark:text-slate-300 text-sm">Projects Completed</div>
+          <div className="grid lg:grid-cols-3 gap-20 items-center mb-20">
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                    <Code className="w-6 h-6 text-white" />
                   </div>
-                </Card>
-                <Card className="p-6 bg-gradient-to-br from-purple-50 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">50+</div>
-                    <div className="text-slate-600 dark:text-slate-300 text-sm">Happy Clients</div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-slate-800 dark:text-white mb-3">My Journey</h3>
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                      I&rsquo;m a software engineering student with hands-on experience building modern web applications through academic and personal projects. 
+                      <br />My passion for technology drives me to continuously learn and adapt to new challenges in the ever-evolving tech landscape.
+                    </p>
                   </div>
-                </Card>
+                </div>
               </div>
             </div>
-
-            <div className="relative">
-              <div className="relative z-10">
-                <Image
-                  src="/placeholder.svg?height=500&width=400"
-                  alt="About me"
-                  width={400}
-                  height={500}
-                  className="rounded-2xl shadow-2xl"
-                />
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                <Zap className="w-6 h-6 text-white" />
               </div>
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-3xl blur-2xl"></div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-800 dark:text-white mb-3">My Expertise</h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                      I specialize in modern technologies like React, Next.js, and Supabase, with a focus on delivering clean, efficient code and intuitive user experiences. 
+                      <br />Every project is an opportunity to solve real-world problems through innovative digital solutions.
+                </p>
+              </div>
             </div>
+            <div className="flex items-start space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                <Heart className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-slate-800 dark:text-white mb-3">My Philosophy</h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
+                      I believe great software comes from understanding user needs and translating them into elegant, functional solutions. 
+                      <br />My approach combines technical excellence with creative problem-solving to deliver exceptional digital experiences.
+                </p>
+              </div>
+            </div>
+          </div>
+          {/* Achievement Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {achievements.map((achievement, index) => (
+              <Card key={index} className="text-center p-8 bg-gradient-to-br from-white/80 to-white/40 dark:from-slate-800/80 dark:to-slate-800/40 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-white">
+                    {achievement.icon}
+                  </div>
+                </div>
+                <div className="text-3xl font-bold text-slate-800 dark:text-white mb-2">
+                  {achievement.number}
+                </div>
+                <div className="text-sm font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  {achievement.label}
+                </div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">
+                  {achievement.description}
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -249,7 +339,7 @@ export default function ModernPortfolio() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((skill, index) => (
+            {skills.map((skill) => (
               <Card
                 key={skill.name}
                 className="p-6 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
@@ -327,25 +417,7 @@ export default function ModernPortfolio() {
                           {tech}
                         </Badge>
                       ))}
-                    </div>
-                    <div className="flex space-x-3">
-                      <Button
-                        size="sm"
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-                        asChild
-                      >
-                        <Link href="#" target="_blank">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Demo
-                        </Link>
-                      </Button>
-                      <Button size="sm" variant="outline" asChild>
-                        <Link href="#" target="_blank">
-                          <Github className="w-4 h-4 mr-2" />
-                          Code
-                        </Link>
-                      </Button>
-                    </div>
+                    </div>  
                   </CardContent>
                 </Card>
               ))}
@@ -356,13 +428,12 @@ export default function ModernPortfolio() {
       {/* Contact Section */}
       <section id="contact" className="py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 dark:text-white mb-6">Let's Work Together</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 dark:text-white mb-6">Let&rsquo;s Work Together</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8"></div>
           <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 max-w-2xl mx-auto">
-            I'm always excited to take on new challenges and collaborate on innovative projects. Let's create something
+            I&rsquo;m always excited to take on new challenges and collaborate on innovative projects. Let&rsquo;s create something
             amazing together!
           </p>
-
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <Card className="p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -371,15 +442,13 @@ export default function ModernPortfolio() {
               <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">Email</h3>
               <p className="text-slate-600 dark:text-slate-300">oussemabenyahia89@gmail.com</p>
             </Card>
-
-            <Card className="p-8 bg-gradient-to-br from-purple-50 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Card className="p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Phone className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">Phone</h3>
               <p className="text-slate-600 dark:text-slate-300">+216 58 185 125</p>
             </Card>
-
             <Card className="p-8 bg-gradient-to-br from-cyan-50 to-blue-100 dark:from-cyan-900/20 dark:to-blue-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="w-8 h-8 text-white" />
@@ -387,24 +456,6 @@ export default function ModernPortfolio() {
               <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2">Location</h3>
               <p className="text-slate-600 dark:text-slate-300">Tunis, Tunisia</p>
             </Card>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              <Mail className="w-5 h-5 mr-2" />
-              Send Message
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105"
-            >
-              <Phone className="w-5 h-5 mr-2" />
-              Schedule Call
-            </Button>
           </div>
         </div>
       </section>
@@ -427,7 +478,7 @@ export default function ModernPortfolio() {
                 className="text-slate-400 hover:text-white transition-colors duration-300"
                 asChild
               >
-                <Link href="https://github.com" target="_blank">
+                <Link href="https://github.com/Oussema-BY" target="_blank">
                   <Github className="w-5 h-5" />
                   <span className="sr-only">GitHub</span>
                 </Link>
