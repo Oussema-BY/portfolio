@@ -253,7 +253,7 @@ export default function  ModernPortfolio() {
               </h1>
 
               <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed transition-colors duration-300">
-                Software Engineering Student Evening Classes & Full-Stack Developer crafting exceptional digital experiences with modern
+                Software Engineering Student – Evening Program & Full-Stack Developer crafting exceptional digital experiences with modern
                 technologies
               </p>
             </div>
