@@ -21,6 +21,7 @@ export default function RootLayout({
       <head>
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="rlJZY3pbyXPsYR0iHzrN1nanGqiqWp00KsnArsX4Exc" />
+        <meta name="author" content="Oussema Ben Yahia" />
       </head>
       <body>
         {children}
