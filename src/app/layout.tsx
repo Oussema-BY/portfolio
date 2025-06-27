@@ -10,7 +10,6 @@ export const metadata: Metadata = {
     canonical: "https://portfolio-delta-blue-uwlp669nrl.vercel.app/",
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -22,7 +21,6 @@ export default function RootLayout({
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="rlJZY3pbyXPsYR0iHzrN1nanGqiqWp00KsnArsX4Exc" />
         <meta name="author" content="Oussema Ben Yahia" />
-
         {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCCNEW3TSZ"></script>
         <script

@@ -165,12 +165,10 @@ export default function  ModernPortfolio() {
             <div className="flex justify-between items-center">
               <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Oussema Ben Yahia
-              </div>
-              
+              </div>    
               <div className="flex items-center space-x-4">
                 {/* Theme Toggle */}
                 <ThemeToggle />
-                
                 {/* Desktop Navigation */}
                 {!isMobile && (
                   <div className="flex space-x-8">
