@@ -22,19 +22,7 @@ export default function RootLayout({
         <meta name="google-site-verification" content="rlJZY3pbyXPsYR0iHzrN1nanGqiqWp00KsnArsX4Exc" />
         <meta name="author" content="Oussema Ben Yahia" />
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCCNEW3TSZ"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-G-KCCNEW3TSZ', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
+        
       </head>
       <body>
         {children}
