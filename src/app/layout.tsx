@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/react'
+
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "My porfolio",
+  title: "Oussema Ben Yahia | Portfolio",
+  description: "Official portfolio website of Oussema Ben Yahia, software engineer Student and web developer.",
+  robots: "index, follow",
+  alternates: {
+    canonical: "https://portfolio-delta-blue-uwlp669nrl.vercel.app/",
+  },
 };
 
 export default function RootLayout({
@@ -13,6 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Google Search Console verification */}
+        <meta name="google-site-verification" content="rlJZY3pbyXPsYR0iHzrN1nanGqiqWp00KsnArsX4Exc" />
+      </head>
       <body>
         {children}
         <Analytics />
