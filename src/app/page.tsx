@@ -2,7 +2,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail, MapPin, Phone, ArrowRight, Star, Menu, X, Code, Zap, Heart, Target, Sun, Moon } from "lucide-react"
+import { Github, Linkedin, Mail, MapPin, Phone, ArrowRight, Star, Menu, X, Code, Zap, Heart, Target, Sun, Moon, ExternalLink } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import * as React from "react"
@@ -75,9 +75,30 @@ export default function  ModernPortfolio() {
   const isMobile = useIsMobile()
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
+  // Smooth scroll function
+  const smoothScrollTo = (elementId: string) => {
+    const element = document.getElementById(elementId)
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   const projects = [
     {
       id: 1,
+      title: "L'Escalier Consulting – Official Website & E-learning Platform",
+      description: "Corporate website for L'Escalier Consulting with a modern design, integrated admin dashboard, and an upcoming E-learning platform currently in progress.",
+      image: "/escalier.jpg?height=300&width=800",
+      technologies: ["Next.js", "React", "Supabase", "PostgreSQL", "Tailwind", "Shadcn UI", "Git"],
+      featured: true,
+      category: "Full-Stack",
+      websiteUrl: "https://escalierconsulting.com"
+  },
+    {
+      id: 2,
       title: "TASKLY – Task & Project Management App",
       description: "Collaborative web app for managing tasks and projects using Scrum and Kanban.",
       image: "/taskly.jpg?height=300&width=800",
@@ -86,7 +107,7 @@ export default function  ModernPortfolio() {
       category: "Full-Stack",
     },
     {
-      id: 2,
+      id: 3,
       title: "TUNIJOBS – Freelance Job Matching Platform",
       description: "Dashboard system for clients and freelancers to post/apply to job offers.",
       image: "/tunijobs.jpg?height=300&width=500",
@@ -135,14 +156,15 @@ export default function  ModernPortfolio() {
   ]
 
   const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
+    { href: "home", label: "Home" },
+    { href: "about", label: "About" },
+    { href: "projects", label: "Projects" },
+    { href: "contact", label: "Contact" },
   ]
 
-  const handleNavClick = () => {
+  const handleNavClick = (sectionId: string) => {
     setMobileMenuOpen(false)
+    smoothScrollTo(sectionId)
   }
 
   React.useEffect(() => {
@@ -155,6 +177,14 @@ export default function  ModernPortfolio() {
       document.body.style.overflow = 'unset'
     }
   }, [mobileMenuOpen])
+
+  // Add smooth scrolling CSS
+  React.useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth'
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto'
+    }
+  }, [])
 
   return (
     <ThemeProvider>
@@ -173,13 +203,13 @@ export default function  ModernPortfolio() {
                 {!isMobile && (
                   <div className="flex space-x-8">
                     {navItems.map((item) => (
-                      <Link
+                      <button
                         key={item.href}
-                        href={item.href}
-                        className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+                        onClick={() => smoothScrollTo(item.href)}
+                        className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 cursor-pointer"
                       >
                         {item.label}
-                      </Link>
+                      </button>
                     ))}
                   </div>
                 )}
@@ -203,14 +233,13 @@ export default function  ModernPortfolio() {
               <div className="absolute top-full left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-white/20 dark:border-slate-700/50 shadow-lg transition-colors duration-300">
                 <div className="px-6 py-4 space-y-4">
                   {navItems.map((item) => (
-                    <Link
+                    <button
                       key={item.href}
-                      href={item.href}
-                      onClick={handleNavClick}
-                      className="block text-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 py-2"
+                      onClick={() => handleNavClick(item.href)}
+                      className="block w-full text-left text-lg text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 py-2 cursor-pointer"
                     >
                       {item.label}
-                    </Link>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -483,7 +512,18 @@ export default function  ModernPortfolio() {
                             {tech}
                           </Badge>
                         ))}
-                      </div>  
+                      </div>
+                      {project.websiteUrl && (
+                        <Button
+                          asChild
+                          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          <Link href={project.websiteUrl} target="_blank" rel="noopener noreferrer">
+                            Visit Website
+                            <ExternalLink className="ml-2 w-4 h-4" />
+                          </Link>
+                        </Button>
+                      )}
                     </CardContent>
                   </Card>
                 ))}
@@ -516,7 +556,7 @@ export default function  ModernPortfolio() {
                 <p className="text-slate-600 dark:text-slate-300 transition-colors duration-300">+216 58 185 125</p>
               </Card>
               <Card className="p-8 bg-gradient-to-br from-cyan-50 to-blue-100 dark:from-cyan-900/20 dark:to-blue-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <MapPin className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2 transition-colors duration-300">Location</h3>
