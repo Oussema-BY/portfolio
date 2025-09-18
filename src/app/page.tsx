@@ -89,8 +89,8 @@ export default function  ModernPortfolio() {
   const projects = [
     {
       id: 1,
-      title: "L'Escalier Consulting – Official Website & E-learning Platform",
-      description: "Corporate website for L'Escalier Consulting with a modern design, integrated admin dashboard, and an upcoming E-learning platform currently in progress.",
+      title: "L'escalier Consulting – Official Website",
+      description: "Corporate website for L'Escalier Consulting with a modern design, integrated admin dashboard.",
       image: "/escalier.jpg?height=300&width=800",
       technologies: ["Next.js", "React", "Supabase", "PostgreSQL", "Tailwind", "Shadcn UI", "Git"],
       featured: true,
