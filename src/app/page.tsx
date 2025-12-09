@@ -310,7 +310,7 @@ export default function ModernPortfolio() {
               <div className="w-32 h-32 mx-auto mb-8 relative group">
                 <div className="w-full h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-1 group-hover:scale-105 transition-transform duration-300">
                   <Image
-                    src="/oussema.JPG"
+                    src="/oussema.jpg"
                     height={128}
                     width={128}
                     alt="profile picture"
