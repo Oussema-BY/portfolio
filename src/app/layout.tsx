@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from '@vercel/analytics/react'
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Oussema Ben Yahia | Portfolio",
@@ -24,8 +25,13 @@ export default function RootLayout({
         <meta name="author" content="Oussema Ben Yahia" />
 
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F7Y0BBH990"></script>
-        <script
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-F7Y0BBH990"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="ga-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
