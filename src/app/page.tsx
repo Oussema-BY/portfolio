@@ -25,6 +25,15 @@ import {
   Sun,
   Moon,
   ExternalLink,
+  Send,
+  CalendarDays,
+  CheckCircle2,
+  Loader2,
+  Clock,
+  Globe,
+  BellRing,
+  MailCheck,
+  Timer,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -96,6 +105,363 @@ function ThemeToggle() {
   );
 }
 
+/* ─────────────────────────────────────────────
+   Contact Section — fully self-contained
+───────────────────────────────────────────── */
+type ContactFormState = "idle" | "sending" | "sent" | "error";
+interface ContactFormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+
+function ContactSection() {
+  const [formState, setFormState] = React.useState<ContactFormState>("idle");
+  const [errorMsg, setErrorMsg] = React.useState("");
+  const [formData, setFormData] = React.useState<ContactFormData>({
+    name: "", email: "", subject: "", message: "",
+  });
+  const [focused, setFocused] = React.useState<string | null>(null);
+
+  const set = (key: keyof ContactFormData) => (val: string) =>
+    setFormData((p) => ({ ...p, [key]: val }));
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormState("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setFormState("sent");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setErrorMsg(data.error ?? "Something went wrong. Please try again.");
+        setFormState("error");
+      }
+    } catch {
+      setErrorMsg("Network error — please check your connection.");
+      setFormState("error");
+    }
+  };
+
+  const inputClass = (field: string) =>
+    `w-full px-4 py-3 rounded-xl text-sm outline-none transition-all duration-200 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 border ${
+      focused === field
+        ? "border-blue-500 shadow-[0_0_0_3px_rgba(99,102,241,0.15)]"
+        : "border-slate-200 dark:border-slate-700"
+    }`;
+
+  return (
+    <section
+      id="contact"
+      className="py-24 px-6 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm relative overflow-hidden transition-colors duration-300"
+    >
+      {/* Subtle background blobs — same pattern as About section */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-10 w-40 h-40 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-2xl" />
+        <div className="absolute bottom-20 left-10 w-32 h-32 bg-gradient-to-tr from-purple-400/10 to-pink-600/10 rounded-full blur-2xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+
+        {/* ── Section header — matches About / Projects pattern ── */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-6">
+            <Mail className="w-4 h-4 text-blue-500 mr-2" />
+            <span className="text-sm font-medium text-blue-600 dark:text-blue-400">
+              Contact
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 dark:text-white mb-6 leading-tight transition-colors duration-300">
+            Let&rsquo;s Work{" "}
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Together
+            </span>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8" />
+          <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed transition-colors duration-300">
+            Have a project in mind? I read every message personally and reply within 24 hours.
+          </p>
+        </div>
+
+        {/* ── Row 1 — 3 contact info cards + status ── */}
+        <div className="grid md:grid-cols-4 gap-6 mb-12">
+          {/* Status */}
+          <Card className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="flex items-center gap-3 mb-2">
+              <span className="pulse-dot" />
+              <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                Available for Work
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Open to freelance &amp; full-time roles.<br />Replies within 24 hours.
+            </p>
+          </Card>
+
+          {/* Email */}
+          <Card className="p-6 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-4">
+              <Mail className="w-5 h-5 text-white" />
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">Email</p>
+            <a
+              href="mailto:oussemabenyahia89@gmail.com"
+              className="text-sm font-medium text-slate-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 break-all"
+            >
+              oussemabenyahia89@gmail.com
+            </a>
+          </Card>
+
+          {/* Phone */}
+          <Card className="p-6 bg-gradient-to-br from-purple-50 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mb-4">
+              <Phone className="w-5 h-5 text-white" />
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">Phone</p>
+            <a
+              href="tel:+21658185125"
+              className="text-sm font-medium text-slate-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+            >
+              +216 58 185 125
+            </a>
+          </Card>
+
+          {/* Location */}
+          <Card className="p-6 bg-gradient-to-br from-cyan-50 to-blue-100 dark:from-cyan-900/20 dark:to-blue-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center mb-4">
+              <MapPin className="w-5 h-5 text-white" />
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">Location</p>
+            <span className="text-sm font-medium text-slate-800 dark:text-white">
+              Tunis, Tunisia
+            </span>
+          </Card>
+        </div>
+
+        {/* ── Row 2 — Form card ── */}
+        <Card className="overflow-hidden bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-0 shadow-xl">
+          {/* Top rainbow bar */}
+          <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+
+          <div className="grid lg:grid-cols-[300px_1fr]">
+
+            {/* Left — context panel */}
+            <div className="p-8 lg:p-10 bg-gradient-to-b from-slate-50/80 to-white/40 dark:from-slate-700/40 dark:to-slate-800/20 lg:border-r border-slate-100 dark:border-slate-700 flex flex-col gap-6 transition-colors duration-300">
+              <div>
+                <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-3 transition-colors duration-300">
+                  Send a Message
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300 transition-colors duration-300">
+                  Fill out the form and I&apos;ll get back to you as soon as possible.
+                  You&apos;ll also receive an automatic confirmation email.
+                </p>
+              </div>
+
+              {/* Social links */}
+              <div className="flex gap-3">
+                {[
+                  { href: "https://github.com/Oussema-BY", Icon: Github, label: "GitHub" },
+                  { href: "https://www.linkedin.com/in/oussema-ben-yahia/", Icon: Linkedin, label: "LinkedIn" },
+                  { href: "mailto:oussemabenyahia89@gmail.com", Icon: Mail, label: "Email" },
+                ].map(({ href, Icon, label }) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    target={href.startsWith("mailto") ? undefined : "_blank"}
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-10 h-10 rounded-xl flex items-center justify-center bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-500 dark:text-slate-400 hover:text-blue-600 hover:border-blue-400 hover:shadow-md transition-all duration-200"
+                  >
+                    <Icon className="w-4 h-4" />
+                  </Link>
+                ))}
+              </div>
+
+              {/* What to expect */}
+              <div className="space-y-3 mt-auto">
+                {[
+                  {
+                    Icon: BellRing,
+                    title: "Instant notification",
+                    sub: "I get alerted right away",
+                    gradient: "from-blue-500 to-indigo-500",
+                  },
+                  {
+                    Icon: MailCheck,
+                    title: "Auto-reply to you",
+                    sub: "Confirmation in your inbox",
+                    gradient: "from-emerald-500 to-teal-500",
+                  },
+                  {
+                    Icon: Timer,
+                    title: "Fast response",
+                    sub: "Usually within a few hours",
+                    gradient: "from-purple-500 to-pink-500",
+                  },
+                ].map(({ Icon, title, sub, gradient }) => (
+                  <div
+                    key={title}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-white/60 dark:bg-slate-700/40 border border-slate-100 dark:border-slate-600 transition-colors duration-300"
+                  >
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-gradient-to-br ${gradient}`}>
+                      <Icon className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold text-slate-700 dark:text-slate-200">{title}</div>
+                      <div className="text-xs text-slate-400 dark:text-slate-500">{sub}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right — form */}
+            <div className="p-8 lg:p-10">
+              {formState === "sent" ? (
+                /* ── Success state ── */
+                <div className="flex flex-col items-center justify-center min-h-[380px] text-center">
+                  <div className="w-20 h-20 rounded-full flex items-center justify-center mb-6 bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20 border-2 border-emerald-200 dark:border-emerald-700">
+                    <CheckCircle2 className="w-10 h-10 text-emerald-500" />
+                  </div>
+                  <h4 className="text-2xl font-bold text-slate-800 dark:text-white mb-3 transition-colors duration-300">
+                    Message Sent! 🎉
+                  </h4>
+                  <p className="text-sm text-slate-600 dark:text-slate-300 max-w-xs mb-2 leading-relaxed transition-colors duration-300">
+                    Oussema has been notified. A confirmation email is on its way to your inbox.
+                  </p>
+                  <p className="text-xs text-slate-400 mb-8">
+                    (Check your spam folder if you don&apos;t see it within a minute.)
+                  </p>
+                  <Button
+                    onClick={() => setFormState("idle")}
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    Send Another Message
+                  </Button>
+                </div>
+              ) : (
+                /* ── Form ── */
+                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                  {/* Name + Email */}
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="c-name" className="block text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2">
+                        Full Name <span className="text-blue-500">*</span>
+                      </label>
+                      <input
+                        id="c-name"
+                        type="text"
+                        required
+                        value={formData.name}
+                        onChange={(e) => set("name")(e.target.value)}
+                        placeholder="John Doe"
+                        onFocus={() => setFocused("name")}
+                        onBlur={() => setFocused(null)}
+                        className={inputClass("name")}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="c-email" className="block text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2">
+                        Email Address <span className="text-blue-500">*</span>
+                      </label>
+                      <input
+                        id="c-email"
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => set("email")(e.target.value)}
+                        placeholder="you@company.com"
+                        onFocus={() => setFocused("email")}
+                        onBlur={() => setFocused(null)}
+                        className={inputClass("email")}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Subject */}
+                  <div>
+                    <label htmlFor="c-subject" className="block text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2">
+                      Subject <span className="text-blue-500">*</span>
+                    </label>
+                    <input
+                      id="c-subject"
+                      type="text"
+                      required
+                      value={formData.subject}
+                      onChange={(e) => set("subject")(e.target.value)}
+                      placeholder="What&apos;s this about?"
+                      onFocus={() => setFocused("subject")}
+                      onBlur={() => setFocused(null)}
+                      className={inputClass("subject")}
+                    />
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label htmlFor="c-message" className="block text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-2">
+                      Message <span className="text-blue-500">*</span>
+                    </label>
+                    <textarea
+                      id="c-message"
+                      required
+                      rows={5}
+                      value={formData.message}
+                      onChange={(e) => set("message")(e.target.value)}
+                      placeholder="Tell me about your project, idea, or question..."
+                      onFocus={() => setFocused("message")}
+                      onBlur={() => setFocused(null)}
+                      className={`${inputClass("message")} resize-none`}
+                    />
+                    <div className={`text-right text-xs mt-1 ${formData.message.length > 3500 ? "text-amber-500" : "text-slate-400"}`}>
+                      {formData.message.length} / 4000
+                    </div>
+                  </div>
+
+                  {/* Error */}
+                  {formState === "error" && errorMsg && (
+                    <div className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400">
+                      <span>⚠</span> {errorMsg}
+                    </div>
+                  )}
+
+                  {/* Submit */}
+                  <div className="flex items-center gap-4 pt-1">
+                    <Button
+                      type="submit"
+                      disabled={formState === "sending"}
+                      size="lg"
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    >
+                      {formState === "sending" ? (
+                        <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Sending…</>
+                      ) : (
+                        <><Send className="w-4 h-4 mr-2" /> Send Message</>
+                      )}
+                    </Button>
+                    <p className="text-xs text-slate-400 dark:text-slate-500 leading-relaxed">
+                      You&apos;ll receive an auto-reply<br />confirmation in your inbox.
+                    </p>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </Card>
+
+      </div>
+    </section>
+  );
+}
+
 export default function ModernPortfolio() {
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -133,6 +499,16 @@ export default function ModernPortfolio() {
     },
     {
       id: 2,
+      title: "TUNIJOBS – Job Matching Platform",
+      description:
+        "Dashboard system for Recruiters and candidates to post/apply to job offers with automated matching systems.",
+      image: "/tuni-jobs.jpg",
+      technologies: ["Angular", "Spring Boot", "Supabase", "N8N", "PrimeNG"],
+      featured: true,
+      category: "Full-Stack",
+    },
+    {
+      id: 3,
       title: "TASKLY – Task & Project Management App",
       description:
         "Collaborative web app for managing tasks and projects using Scrum and Kanban.",
@@ -148,16 +524,7 @@ export default function ModernPortfolio() {
       featured: true,
       category: "Full-Stack",
     },
-    {
-      id: 3,
-      title: "TUNIJOBS – Freelance Job Matching Platform",
-      description:
-        "Dashboard system for clients and freelancers to post/apply to job offers.",
-      image: "/tunijobs.jpg",
-      technologies: ["HTML", "CSS", "Bootstrap", "PHP", "MySQL"],
-      featured: true,
-      category: "Web App",
-    },
+    
   ];
 
   const skills = [
@@ -635,55 +1002,7 @@ export default function ModernPortfolio() {
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section id="contact" className="py-24 px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 dark:text-white mb-6 transition-colors duration-300">
-              Let&rsquo;s Work Together
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-8"></div>
-            <p className="text-xl text-slate-600 dark:text-slate-300 mb-12 max-w-2xl mx-auto transition-colors duration-300">
-              I&rsquo;m always excited to take on new challenges and collaborate
-              on innovative projects. Let&rsquo;s create something amazing
-              together!
-            </p>
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <Card className="p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Mail className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2 transition-colors duration-300">
-                  Email
-                </h3>
-                <p className="text-slate-600 dark:text-slate-300 transition-colors duration-300">
-                  oussemabenyahia89@gmail.com
-                </p>
-              </Card>
-              <Card className="p-8 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Phone className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2 transition-colors duration-300">
-                  Phone
-                </h3>
-                <p className="text-slate-600 dark:text-slate-300 transition-colors duration-300">
-                  +216 58 185 125
-                </p>
-              </Card>
-              <Card className="p-8 bg-gradient-to-br from-cyan-50 to-blue-100 dark:from-cyan-900/20 dark:to-blue-900/20 border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <MapPin className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-2 transition-colors duration-300">
-                  Location
-                </h3>
-                <p className="text-slate-600 dark:text-slate-300 transition-colors duration-300">
-                  Tunis, Tunisia
-                </p>
-              </Card>
-            </div>
-          </div>
-        </section>
+        <ContactSection />
 
         {/* Footer */}
         <footer className="py-12 px-6 bg-slate-900 dark:bg-slate-950">
