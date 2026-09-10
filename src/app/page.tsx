@@ -26,11 +26,8 @@ import {
   Moon,
   ExternalLink,
   Send,
-  CalendarDays,
   CheckCircle2,
   Loader2,
-  Clock,
-  Globe,
   BellRing,
   MailCheck,
   Timer,
@@ -106,7 +103,7 @@ function ThemeToggle() {
 }
 
 /* ─────────────────────────────────────────────
-   Contact Section — fully self-contained
+   Contact Section
 ───────────────────────────────────────────── */
 type ContactFormState = "idle" | "sending" | "sent" | "error";
 interface ContactFormData {
@@ -333,7 +330,7 @@ function ContactSection() {
                     <CheckCircle2 className="w-10 h-10 text-emerald-500" />
                   </div>
                   <h4 className="text-2xl font-bold text-slate-800 dark:text-white mb-3 transition-colors duration-300">
-                    Message Sent! 🎉
+                    Message Sent! 
                   </h4>
                   <p className="text-sm text-slate-600 dark:text-slate-300 max-w-xs mb-2 leading-relaxed transition-colors duration-300">
                     Oussema has been notified. A confirmation email is on its way to your inbox.
@@ -495,7 +492,7 @@ export default function ModernPortfolio() {
       ],
       featured: true,
       category: "Full-Stack",
-      websiteUrl: "https://escalierconsulting.com",
+      websiteUrl: "https://escalierconsulting.vercel.app",
     },
     {
       id: 2,
