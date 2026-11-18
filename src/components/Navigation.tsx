@@ -92,8 +92,8 @@ export function Navigation() {
               <div
                 className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black text-white"
                 style={{
-                  background: "linear-gradient(135deg, #6366F1, #818CF8)",
-                  boxShadow: "0 0 16px rgba(99,102,241,0.3)",
+                  background: "linear-gradient(135deg, #38BDF8, #0284C7)",
+                  boxShadow: "0 0 16px rgba(56,189,248,0.3)",
                 }}
               >
                 OBY
@@ -147,8 +147,8 @@ export function Navigation() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-all hover:opacity-90"
                 style={{
-                  background: "linear-gradient(135deg, #6366F1, #818CF8)",
-                  boxShadow: "0 0 20px rgba(99,102,241,0.2)",
+                  background: "linear-gradient(135deg, #38BDF8, #0284C7)",
+                  boxShadow: "0 0 20px rgba(56,189,248,0.25)",
                 }}
               >
                 <Download className="w-3.5 h-3.5" />
@@ -211,7 +211,7 @@ export function Navigation() {
                   href="/resume.pdf"
                   target="_blank"
                   className="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-white"
-                  style={{ background: "linear-gradient(135deg, #6366F1, #818CF8)" }}
+                  style={{ background: "linear-gradient(135deg, #38BDF8, #0284C7)" }}
                 >
                   <Download className="w-4 h-4" />
                   Download Resume

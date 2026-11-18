@@ -241,8 +241,8 @@ function RepoCard({ repo }: { repo: GitHubRepo }) {
         border: "1px solid rgba(255,255,255,0.08)",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.3)";
-        (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(99,102,241,0.05)";
+        (e.currentTarget as HTMLElement).style.borderColor = "rgba(56,189,248,0.3)";
+        (e.currentTarget as HTMLElement).style.backgroundColor = "rgba(56,189,248,0.05)";
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
@@ -270,7 +270,7 @@ function RepoCard({ repo }: { repo: GitHubRepo }) {
               className="w-2 h-2 rounded-full"
               style={{
                 backgroundColor:
-                  LANG_COLORS[repo.language] ?? "#6366F1",
+                  LANG_COLORS[repo.language] ?? "#38BDF8",
               }}
             />
             {repo.language}
@@ -372,8 +372,8 @@ export function GitHubActivity() {
           className="mb-12"
         >
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-5 h-px" style={{ backgroundColor: "#6366F1" }} />
-            <span className="text-label" style={{ color: "#6366F1" }}>
+            <div className="w-5 h-px" style={{ backgroundColor: "#38BDF8" }} />
+            <span className="text-label" style={{ color: "#38BDF8" }}>
               GitHub Activity
             </span>
           </div>
@@ -398,7 +398,7 @@ export function GitHubActivity() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-white"
-                  style={{ color: "#6366F1" }}
+                  style={{ color: "#38BDF8" }}
                 >
                   github.com/Oussema-BY
                 </a>
@@ -442,7 +442,7 @@ export function GitHubActivity() {
                 href="https://github.com/Oussema-BY"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#6366F1] hover:underline"
+                className="text-[#38BDF8] hover:underline"
               >
                 github.com/Oussema-BY
               </a>{" "}
@@ -487,12 +487,12 @@ export function GitHubActivity() {
                   className="rounded-xl p-5"
                   style={{
                     backgroundColor: "#111113",
-                    border: "1px solid rgba(99,102,241,0.2)",
+                    border: "1px solid rgba(56,189,248,0.2)",
                   }}
                 >
                   <div
                     className="text-2xl font-bold mb-1"
-                    style={{ color: "#6366F1" }}
+                    style={{ color: "#38BDF8" }}
                   >
                     {data.contributions.totalContributions.toLocaleString()}
                   </div>
@@ -568,7 +568,7 @@ export function GitHubActivity() {
                     href="https://github.com/Oussema-BY"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#6366F1] hover:underline"
+                    className="text-[#38BDF8] hover:underline"
                   >
                     View on GitHub ↗
                   </a>

@@ -284,7 +284,7 @@ function useSectionReveal(ref: React.RefObject<HTMLElement | null>) {
 function StatusBadge({ status }: { status: Project["status"] }) {
   const configs = {
     live: { label: "Live", color: "#10B981", bg: "rgba(16,185,129,0.12)" },
-    private: { label: "Production", color: "#6366F1", bg: "rgba(99,102,241,0.12)" },
+    private: { label: "Production", color: "#38BDF8", bg: "rgba(56,189,248,0.12)" },
     "in-progress": { label: "Active", color: "#F59E0B", bg: "rgba(245,158,11,0.12)" },
   };
   const cfg = configs[status];
@@ -532,8 +532,8 @@ export function Projects() {
           className="mb-12 md:mb-16"
         >
           <div className="flex items-center gap-2 mb-3 md:mb-4">
-            <div className="w-5 h-px" style={{ backgroundColor: "#6366F1" }} />
-            <span className="text-label" style={{ color: "#6366F1" }}>
+            <div className="w-5 h-px" style={{ backgroundColor: "#38BDF8" }} />
+            <span className="text-label" style={{ color: "#38BDF8" }}>
               Selected Products
             </span>
           </div>

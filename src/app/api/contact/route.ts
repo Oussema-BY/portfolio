@@ -86,7 +86,7 @@ function buildEmailHtml(payload: ContactPayload): string {
       position: absolute;
       top: -60px; right: -60px;
       width: 220px; height: 220px;
-      background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(56,189,248,0.18) 0%, transparent 70%);
       border-radius: 50%;
     }
 
@@ -95,11 +95,11 @@ function buildEmailHtml(payload: ContactPayload): string {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(99,102,241,0.5), transparent);
+      background: linear-gradient(90deg, transparent, rgba(56,189,248,0.5), transparent);
     }
 
     .logo-badge {
-      background: linear-gradient(135deg, #6366F1, #818CF8);
+      background: linear-gradient(135deg, #38BDF8, #0284C7);
       border-radius: 12px;
       width: 44px; height: 44px;
       text-align: center;
@@ -121,12 +121,12 @@ function buildEmailHtml(payload: ContactPayload): string {
 
     .badge-new {
       display: inline-block;
-      background: rgba(99,102,241,0.12);
-      border: 1px solid rgba(99,102,241,0.3);
+      background: rgba(56,189,248,0.12);
+      border: 1px solid rgba(56,189,248,0.3);
       border-radius: 20px;
       padding: 6px 12px;
       font-size: 11px; font-weight: 600;
-      color: #818CF8;
+      color: #38BDF8;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       margin-bottom: 14px;
@@ -136,7 +136,7 @@ function buildEmailHtml(payload: ContactPayload): string {
     .badge-dot {
       display: inline-block;
       width: 6px; height: 6px;
-      background: #818CF8;
+      background: #38BDF8;
       border-radius: 50%;
       margin-right: 6px;
       vertical-align: middle;
@@ -174,7 +174,7 @@ function buildEmailHtml(payload: ContactPayload): string {
 
     .sender-avatar {
       width: 48px; height: 48px;
-      background: linear-gradient(135deg, #6366F1, #06B6D4);
+      background: linear-gradient(135deg, #38BDF8, #0284C7);
       border-radius: 50%;
       font-size: 18px; font-weight: 700; color: #fff;
       text-align: center;
@@ -182,7 +182,7 @@ function buildEmailHtml(payload: ContactPayload): string {
     }
 
     .sender-name { font-size: 16px; font-weight: 600; color: #EEF2FF; }
-    .sender-email { font-size: 13px; color: #6366F1; margin-top: 3px; }
+    .sender-email { font-size: 13px; color: #38BDF8; margin-top: 3px; }
 
     /* ─ Field rows ─ */
     .field-label {
@@ -218,7 +218,7 @@ function buildEmailHtml(payload: ContactPayload): string {
     .message-box {
       background: #0F1629;
       border: 1px solid #1E2A3A;
-      border-left: 3px solid #6366F1;
+      border-left: 3px solid #38BDF8;
       border-radius: 0 10px 10px 0;
       padding: 20px 24px;
       margin-top: 12px;
@@ -231,14 +231,14 @@ function buildEmailHtml(payload: ContactPayload): string {
 
     .cta-btn {
       display: inline-block;
-      background: linear-gradient(135deg, #6366F1, #818CF8);
+      background: linear-gradient(135deg, #38BDF8, #0284C7);
       color: #fff !important;
       text-decoration: none;
       padding: 14px 36px;
       border-radius: 12px;
       font-size: 15px; font-weight: 600;
       letter-spacing: -0.1px;
-      box-shadow: 0 8px 24px rgba(99,102,241,0.35);
+      box-shadow: 0 8px 24px rgba(56,189,248,0.35);
     }
 
     .cta-note {
@@ -261,7 +261,7 @@ function buildEmailHtml(payload: ContactPayload): string {
       line-height: 1.7;
     }
 
-    .footer-accent { color: #6366F1; }
+    .footer-accent { color: #38BDF8; }
 
     .timestamp-badge {
       display: inline-flex;
@@ -390,13 +390,13 @@ function buildAutoReplyHtml(name: string): string {
 
     .top-bar {
       height: 4px;
-      background: linear-gradient(90deg, #6366F1, #06B6D4);
+      background: linear-gradient(90deg, #38BDF8, #0284C7);
     }
 
     .content { padding: 48px; }
 
     .logo-badge {
-      background: linear-gradient(135deg, #6366F1, #818CF8);
+      background: linear-gradient(135deg, #38BDF8, #0284C7);
       border-radius: 14px;
       width: 52px; height: 52px;
       text-align: center;
@@ -420,7 +420,7 @@ function buildAutoReplyHtml(name: string): string {
     .info-row {
       background: #141926;
       border: 1px solid #1C2840;
-      border-left: 4px solid #6366F1;
+      border-left: 4px solid #38BDF8;
       border-radius: 8px;
       padding: 16px 20px;
       margin-bottom: 12px;
@@ -436,7 +436,7 @@ function buildAutoReplyHtml(name: string): string {
       border-top: 1px solid #1C2840;
     }
 
-    .accent { color: #6366F1; }
+    .accent { color: #38BDF8; }
   </style>
 </head>
 <body>
@@ -451,7 +451,7 @@ function buildAutoReplyHtml(name: string): string {
           will get back to you as soon as possible — usually within 24 hours.
         </p>
 
-        <div class="info-row" style="border-left-color: #6366F1;">
+        <div class="info-row" style="border-left-color: #38BDF8;">
           <div>
             <div class="info-label">Response time</div>
             <div class="info-text">Within 24 hours on business days</div>

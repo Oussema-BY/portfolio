@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Github, Linkedin, Mail, ArrowDown, Download } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowDown, Download, ChevronDown, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
 // ── Animated Canvas — Connected Tech Nodes ──────────────────────────────────
@@ -88,7 +88,7 @@ function TechCanvas() {
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -96,14 +96,15 @@ function TechCanvas() {
       }
 
       // Draw nodes
-      nodes.forEach((n) => {
+      nodes.forEach((n, idx) => {
         const pulse = Math.sin(n.pulse) * 0.3 + 0.7;
         const r = n.r * pulse;
+        const nodeColor = idx % 2 === 0 ? "56, 189, 248" : "2, 132, 199";
 
         // Glow
         const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4);
-        grad.addColorStop(0, `rgba(99, 102, 241, ${n.opacity * 0.3})`);
-        grad.addColorStop(1, "rgba(99, 102, 241, 0)");
+        grad.addColorStop(0, `rgba(${nodeColor}, ${n.opacity * 0.3})`);
+        grad.addColorStop(1, `rgba(${nodeColor}, 0)`);
         ctx.beginPath();
         ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2);
         ctx.fillStyle = grad;
@@ -112,7 +113,7 @@ function TechCanvas() {
         // Core dot
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(99, 102, 241, ${n.opacity})`;
+        ctx.fillStyle = `rgba(${nodeColor}, ${n.opacity})`;
         ctx.fill();
 
         // Label (only large enough nodes)
@@ -144,56 +145,23 @@ function TechCanvas() {
   );
 }
 
-// ── Typewriter ───────────────────────────────────────────────────────────────
-function Typewriter({ words }: { words: string[] }) {
-  const [index, setIndex] = React.useState(0);
-  const [display, setDisplay] = React.useState("");
-  const [deleting, setDeleting] = React.useState(false);
 
-  React.useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplay(words[0]);
-      return;
-    }
-
-    const current = words[index];
-    const speed = deleting ? 50 : 90;
-    const pause = deleting ? 0 : 1800;
-
-    if (!deleting && display === current) {
-      const t = setTimeout(() => setDeleting(true), pause);
-      return () => clearTimeout(t);
-    }
-
-    if (deleting && display === "") {
-      setDeleting(false);
-      setIndex((i) => (i + 1) % words.length);
-      return;
-    }
-
-    const t = setTimeout(() => {
-      setDisplay(deleting ? display.slice(0, -1) : current.slice(0, display.length + 1));
-    }, speed);
-    return () => clearTimeout(t);
-  }, [display, deleting, index, words]);
-
-  return (
-    <span style={{ color: "#6366F1" }}>
-      {display}
-      <span
-        className="inline-block w-0.5 h-6 ml-0.5 align-middle"
-        style={{
-          backgroundColor: "#6366F1",
-          animation: "blink 1s step-end infinite",
-        }}
-      />
-      <style>{`@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }`}</style>
-    </span>
-  );
-}
 
 // ── Main Hero Component ───────────────────────────────────────────────────────
 export function Hero() {
+  const scrollToAbout = () => {
+    const el = document.getElementById("about");
+    if (el) {
+      const lenis = (window as unknown as { lenis?: { scrollTo: (target: HTMLElement, options?: object) => void } }).lenis;
+      if (lenis) {
+        lenis.scrollTo(el, { offset: -72, duration: 1.2 });
+      } else {
+        const offset = 72;
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - offset, behavior: "smooth" });
+      }
+    }
+  };
+
   const scrollToWork = () => {
     const el = document.getElementById("projects");
     if (el) {
@@ -236,7 +204,7 @@ export function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(99,102,241,0.08) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 60% at 50% 50%, rgba(56,189,248,0.08) 0%, transparent 70%)",
         }}
       />
 
@@ -252,80 +220,117 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center pt-24 pb-16 md:pt-0 md:pb-0">
-        {/* Status badge */}
+
+        {/* Location / context chip */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full mb-8 sm:mb-10"
           style={{
-            background: "rgba(255,255,255,0.05)",
-            border: "1px solid rgba(255,255,255,0.08)",
+            background: "rgba(56,189,248,0.07)",
+            border: "1px solid rgba(56,189,248,0.18)",
             backdropFilter: "blur(8px)",
           }}
         >
-          <span className="pulse-dot" />
-          <span className="text-[11px] sm:text-xs font-medium text-[#A1A1AA]">
-            Available for full-time &amp; remote opportunities
+          <span
+            className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase"
+            style={{ color: "#38BDF8" }}
+          >
+            <MapPin className="w-3.5 h-3.5" />
+            Tunis, TN
+          </span>
+          <span
+            className="w-px h-3"
+            style={{ backgroundColor: "rgba(56,189,248,0.3)" }}
+          />
+          <span className="text-[10px] sm:text-[11px] font-medium text-[#71717A]">
+            Open to remote · Full-time
           </span>
         </motion.div>
 
-        {/* Main headline */}
+        {/* Main headline — personal, conversational, human */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-4 sm:mb-6"
+          transition={{ duration: 0.65, delay: 0.1 }}
+          className="mb-5 sm:mb-7"
         >
           <h1
-            className="font-bold leading-tight tracking-tight"
+            className="font-bold leading-tight"
             style={{
-              fontSize: "clamp(1.95rem, 5.5vw, 4.75rem)",
-              letterSpacing: "-0.035em",
-              lineHeight: 1.1,
+              fontSize: "clamp(2.1rem, 5.8vw, 5rem)",
+              letterSpacing: "-0.04em",
+              lineHeight: 1.08,
             }}
           >
-            <span className="sr-only">Oussema Ben Yahia — Full-Stack Developer &amp; Software Engineer based in Tunisia. </span>
-            <span className="block text-white mb-1.5 sm:mb-2">I BUILD DIGITAL PRODUCTS</span>
-            <span className="block text-white mb-1.5 sm:mb-2">THAT SOLVE</span>
-            <span className="block" style={{ color: "#6366F1" }}>
-              REAL PROBLEMS.
+            <span className="sr-only">Oussema Ben Yahia — Full-Stack Developer based in Tunisia.</span>
+
+            {/* Line 1: personal name opener */}
+            <span className="block text-white mb-2">
+              Hey, I&rsquo;m Oussema.
+            </span>
+
+            {/* Line 2: the real hook */}
+            <span className="block mb-2" style={{ color: "#A1A1AA", fontWeight: 500, fontSize: "clamp(1.1rem, 2.8vw, 2.4rem)", letterSpacing: "-0.02em" }}>
+              I turn ideas into{" "}
+              <span
+                className="bg-gradient-to-r from-[#38BDF8] to-[#0284C7] bg-clip-text text-transparent font-bold"
+                style={{ fontSize: "inherit" }}
+              >
+                products that ship.
+              </span>
             </span>
           </h1>
         </motion.div>
 
-        {/* Sub-headline */}
+        {/* Sub-headline — versatile full-stack software engineer */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-2xl mx-auto text-[#71717A] mb-3 sm:mb-4 px-2"
-          style={{ fontSize: "clamp(0.925rem, 2vw, 1.2rem)", lineHeight: 1.65 }}
+          className="max-w-2xl mx-auto text-[#71717A] mb-6 sm:mb-8 px-2"
+          style={{ fontSize: "clamp(0.925rem, 1.9vw, 1.15rem)", lineHeight: 1.7 }}
         >
-          Full-Stack Developer crafting scalable web applications, SaaS platforms,
-          and intelligent digital solutions.
+          Full-stack software engineer bridging client vision with resilient architecture.
+          {" "}From responsive web applications to distributed backends and database design &mdash;
+          I build high-performance systems ready for real-world production.
         </motion.p>
 
-        {/* Identity */}
+        {/* Capability chips — true full-stack versatility */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-8 sm:mb-10"
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-9 sm:mb-11 max-w-3xl mx-auto"
         >
-          <p className="text-xs sm:text-sm font-medium text-[#52525B]">
-            Oussema Ben Yahia &mdash;{" "}
-            <Typewriter
-              words={["Full-Stack Developer", "React & Next.js Engineer", "SaaS Builder", "API Architect"]}
-            />
-          </p>
+          {[
+            { label: "Frontend", stack: "React · Next.js · Angular" },
+            { label: "Backend", stack: "Node.js · NestJS · Spring Boot" },
+            { label: "Database", stack: "PostgreSQL · Supabase · MongoDB" },
+            { label: "Architecture", stack: "REST APIs · Scalable Systems" },
+          ].map(({ label, stack }) => (
+            <span
+              key={label}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.07)",
+                color: "#A1A1AA",
+              }}
+            >
+              <span style={{ color: "#38BDF8", fontWeight: 700 }}>{label}</span>
+              <span style={{ color: "#3F3F46" }}>•</span>
+              <span style={{ color: "#D4D4D8" }}>{stack}</span>
+            </span>
+          ))}
         </motion.div>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.42 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10 sm:mb-12 w-full max-w-sm sm:max-w-none mx-auto"
         >
           <button
@@ -334,11 +339,11 @@ export function Hero() {
             data-cursor-label="EXPLORE"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 hover:shadow-xl cursor-pointer"
             style={{
-              background: "linear-gradient(135deg, #6366F1, #818CF8)",
-              boxShadow: "0 0 32px rgba(99,102,241,0.3)",
+              background: "linear-gradient(135deg, #38BDF8, #0284C7)",
+              boxShadow: "0 0 32px rgba(56,189,248,0.28)",
             }}
           >
-            View Selected Work
+            See What I&apos;ve Built
             <ArrowDown className="w-4 h-4" />
           </button>
 
@@ -355,33 +360,21 @@ export function Hero() {
             }}
           >
             <Download className="w-4 h-4" />
-            Download CV
+            Grab My Resume
           </a>
         </motion.div>
 
-        {/* Social Links & Get In Touch — Hidden on mobile as requested */}
+        {/* Social Links & Get In Touch */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.54 }}
           className="hidden sm:flex items-center justify-center gap-3"
         >
           {[
-            {
-              href: "https://github.com/Oussema-BY",
-              icon: <Github className="w-4 h-4" />,
-              label: "GitHub",
-            },
-            {
-              href: "https://www.linkedin.com/in/oussema-ben-yahia/",
-              icon: <Linkedin className="w-4 h-4" />,
-              label: "LinkedIn",
-            },
-            {
-              href: "mailto:oussemabenyahia89@gmail.com",
-              icon: <Mail className="w-4 h-4" />,
-              label: "Email",
-            },
+            { href: "https://github.com/Oussema-BY", icon: <Github className="w-4 h-4" />, label: "GitHub" },
+            { href: "https://www.linkedin.com/in/oussema-ben-yahia/", icon: <Linkedin className="w-4 h-4" />, label: "LinkedIn" },
+            { href: "mailto:oussemabenyahia89@gmail.com", icon: <Mail className="w-4 h-4" />, label: "Email" },
           ].map(({ href, icon, label }) => (
             <a
               key={label}
@@ -408,33 +401,31 @@ export function Hero() {
             onClick={scrollToContact}
             className="text-xs font-medium text-[#52525B] hover:text-[#A1A1AA] transition-colors cursor-pointer"
           >
-            Get in touch →
+            Let&apos;s talk →
           </button>
         </motion.div>
       </div>
 
-      {/* Scroll indicator — Hidden on mobile as requested */}
-      <motion.div
+      {/* Scroll indicator — clean chevron */}
+      <motion.button
+        onClick={scrollToAbout}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="hidden md:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
+        transition={{ delay: 1.3, duration: 0.6 }}
+        className="hidden md:flex absolute bottom-9 left-1/2 -translate-x-1/2 flex-col items-center gap-1 cursor-pointer group"
+        aria-label="Scroll to work"
       >
-        <span className="text-[10px] font-medium tracking-widest uppercase text-[#3F3F46]">
-          Scroll
-        </span>
-        <div
-          className="w-px h-10 relative overflow-hidden"
-          style={{ backgroundColor: "rgba(255,255,255,0.08)" }}
+        <motion.div
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <motion.div
-            className="absolute top-0 w-full"
-            style={{ backgroundColor: "#6366F1", height: "40%" }}
-            animate={{ y: ["0%", "150%"] }}
-            transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+          <ChevronDown
+            className="w-5 h-5 transition-colors group-hover:text-white"
+            style={{ color: "#3F3F46" }}
+            strokeWidth={1.5}
           />
-        </div>
-      </motion.div>
+        </motion.div>
+      </motion.button>
     </section>
   );
 }

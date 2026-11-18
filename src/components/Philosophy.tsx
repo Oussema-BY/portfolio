@@ -29,7 +29,7 @@ const STEPS = [
     title: "Design the System",
     description:
       "I plan the data model, API structure, authentication flow, and component hierarchy before coding. Good architecture makes development faster and future changes easier.",
-    color: "#6366F1",
+    color: "#38BDF8",
   },
   {
     id: "development",
@@ -114,8 +114,8 @@ export function Philosophy() {
           className="mb-12 md:mb-16"
         >
           <div className="flex items-center gap-2 mb-3 md:mb-4">
-            <div className="w-5 h-px" style={{ backgroundColor: "#6366F1" }} />
-            <span className="text-label" style={{ color: "#6366F1" }}>
+            <div className="w-5 h-px" style={{ backgroundColor: "#38BDF8" }} />
+            <span className="text-label" style={{ color: "#38BDF8" }}>
               Engineering Philosophy
             </span>
           </div>
@@ -239,7 +239,7 @@ export function Philosophy() {
               <div
                 className="h-0.5 w-full rounded-full mb-6"
                 style={{
-                  background: "linear-gradient(90deg, #6366F1, #3B82F6, transparent)",
+                  background: "linear-gradient(90deg, #38BDF8, #0284C7, transparent)",
                 }}
               />
 
@@ -258,7 +258,7 @@ export function Philosophy() {
                   >
                     <ArrowRight
                       className="w-3.5 h-3.5 flex-shrink-0 mt-0.5"
-                      style={{ color: "#6366F1" }}
+                      style={{ color: "#38BDF8" }}
                     />
                     <span className="text-sm leading-relaxed" style={{ color: "#A1A1AA" }}>
                       {p}
@@ -296,7 +296,7 @@ export function Philosophy() {
                 >
                   <div
                     className="text-xl font-bold mb-0.5"
-                    style={{ color: "#6366F1" }}
+                    style={{ color: "#38BDF8" }}
                   >
                     {stat.value}
                   </div>

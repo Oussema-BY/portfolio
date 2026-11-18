@@ -67,7 +67,7 @@ const CATEGORIES: Category[] = [
     id: "frontend",
     label: "Frontend",
     icon: <Code2 className="w-4 h-4" />,
-    color: "#6366F1",
+    color: "#38BDF8",
     items: [
       { name: "React.js", icon: <SiReact className="w-5 h-5" />, brandColor: "#61DAFB" },
       { name: "Next.js", icon: <SiNextdotjs className="w-5 h-5" />, brandColor: "#FAFAFA" },
@@ -110,7 +110,7 @@ const CATEGORIES: Category[] = [
     icon: <Lock className="w-4 h-4" />,
     color: "#10B981",
     items: [
-      { name: "Better Auth", icon: <TbShieldLock className="w-5 h-5" />, brandColor: "#6366F1" },
+      { name: "Better Auth", icon: <TbShieldLock className="w-5 h-5" />, brandColor: "#38BDF8" },
       { name: "Google OAuth", icon: <SiGoogle className="w-5 h-5" />, brandColor: "#EA4335" },
       { name: "Resend", icon: <SiResend className="w-5 h-5" />, brandColor: "#FAFAFA" },
       { name: "API Integrations", icon: <TbLayersIntersect className="w-5 h-5" />, brandColor: "#10B981" },
@@ -186,8 +186,8 @@ export function TechStack() {
           className="mb-12 md:mb-16"
         >
           <div className="flex items-center gap-2 mb-3 md:mb-4">
-            <div className="w-5 h-px" style={{ backgroundColor: "#6366F1" }} />
-            <span className="text-label" style={{ color: "#6366F1" }}>
+            <div className="w-5 h-px" style={{ backgroundColor: "#38BDF8" }} />
+            <span className="text-label" style={{ color: "#38BDF8" }}>
               Technical Ecosystem
             </span>
           </div>
@@ -227,11 +227,11 @@ export function TechStack() {
                 style={{
                   background:
                     active === cat.id
-                      ? "rgba(99, 102, 241, 0.12)"
+                      ? "rgba(56, 189, 248, 0.12)"
                       : "rgba(255,255,255,0.02)",
                   border:
                     active === cat.id
-                      ? "1px solid rgba(99, 102, 241, 0.35)"
+                      ? "1px solid rgba(56, 189, 248, 0.35)"
                       : "1px solid rgba(255,255,255,0.06)",
                   color: active === cat.id ? "#FAFAFA" : "#71717A",
                 }}
@@ -304,9 +304,9 @@ export function TechStack() {
                   }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLElement).style.backgroundColor =
-                      "rgba(99,102,241,0.08)";
+                      "rgba(56,189,248,0.08)";
                     (e.currentTarget as HTMLElement).style.borderColor =
-                      "rgba(99,102,241,0.3)";
+                      "rgba(56,189,248,0.3)";
                     (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
                   }}
                   onMouseLeave={(e) => {
@@ -359,7 +359,7 @@ export function TechStack() {
             >
               <div
                 className="text-xl sm:text-2xl font-bold mb-0.5"
-                style={{ color: "#6366F1" }}
+                style={{ color: "#38BDF8" }}
               >
                 {stat.value}
               </div>

@@ -397,9 +397,9 @@ export function Experience() {
                   <span
                     className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md flex items-center gap-1"
                     style={{
-                      backgroundColor: "rgba(168, 85, 247, 0.12)",
-                      border: "1px solid rgba(168, 85, 247, 0.25)",
-                      color: "#C084FC",
+                      backgroundColor: "rgba(56, 189, 248, 0.12)",
+                      border: "1px solid rgba(56, 189, 248, 0.25)",
+                      color: "#38BDF8",
                     }}
                   >
                     <Brain className="w-3 h-3" />
@@ -420,8 +420,8 @@ export function Experience() {
                 <div className="space-y-2.5">
                   {/* AI & Data Science Criteria */}
                   <div>
-                    <div className="text-[10px] font-semibold uppercase tracking-wider text-[#C084FC] mb-1.5 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C084FC]" />
+                    <div className="text-[10px] font-semibold uppercase tracking-wider text-[#38BDF8] mb-1.5 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
                       AI &amp; Data Science Criteria
                     </div>
                     <div className="flex flex-wrap gap-1.5">
@@ -436,9 +436,9 @@ export function Experience() {
                           key={field}
                           className="px-2 py-0.5 rounded text-[11px] font-medium"
                           style={{
-                            backgroundColor: "rgba(168, 85, 247, 0.08)",
-                            border: "1px solid rgba(168, 85, 247, 0.2)",
-                            color: "#D8B4FE",
+                            backgroundColor: "rgba(56, 189, 248, 0.08)",
+                            border: "1px solid rgba(56, 189, 248, 0.2)",
+                            color: "#7DD3FC",
                           }}
                         >
                           {field}

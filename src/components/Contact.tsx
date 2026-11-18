@@ -89,10 +89,10 @@ export function Contact() {
     fontSize: "1rem", // 16px prevents iOS browser auto-zoom
     outline: "none",
     backgroundColor: "rgba(255,255,255,0.03)",
-    border: `1px solid ${focused === field ? "rgba(99,102,241,0.6)" : "rgba(255,255,255,0.08)"}`,
+    border: `1px solid ${focused === field ? "rgba(56,189,248,0.6)" : "rgba(255,255,255,0.08)"}`,
     color: "#FAFAFA",
     transition: "border-color 0.2s ease",
-    boxShadow: focused === field ? "0 0 0 3px rgba(99,102,241,0.08)" : "none",
+    boxShadow: focused === field ? "0 0 0 3px rgba(56,189,248,0.08)" : "none",
   });
 
   return (
@@ -111,11 +111,11 @@ export function Contact() {
           className="mb-10 md:mb-12 text-center"
         >
           <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
-            <div className="w-5 h-px" style={{ backgroundColor: "#6366F1" }} />
-            <span className="text-label" style={{ color: "#6366F1" }}>
+            <div className="w-5 h-px" style={{ backgroundColor: "#38BDF8" }} />
+            <span className="text-label" style={{ color: "#38BDF8" }}>
               Get In Touch
             </span>
-            <div className="w-5 h-px" style={{ backgroundColor: "#6366F1" }} />
+            <div className="w-5 h-px" style={{ backgroundColor: "#38BDF8" }} />
           </div>
           <h2
             className="font-bold text-white mb-3 md:mb-4 mx-auto tracking-tight"
@@ -128,7 +128,7 @@ export function Contact() {
           >
             Have A Product In Mind?
             <br />
-            <span style={{ color: "#6366F1" }}>Let&apos;s Build It.</span>
+            <span style={{ color: "#38BDF8" }}>Let&apos;s Build It.</span>
           </h2>
           <p
             className="text-sm sm:text-base leading-relaxed"
@@ -149,19 +149,25 @@ export function Contact() {
           <div
             className="rounded-xl p-4 flex items-start gap-3"
             style={{
-              backgroundColor: "rgba(34,197,94,0.05)",
-              border: "1px solid rgba(34,197,94,0.15)",
+              backgroundColor: "rgba(56,189,248,0.05)",
+              border: "1px solid rgba(56,189,248,0.15)",
             }}
           >
-            <div className="flex-shrink-0 mt-1">
-              <span className="pulse-dot" />
+            <div className="flex-shrink-0 mt-0.5">
+              <span
+                className="inline-block w-2 h-2 rounded-full"
+                style={{
+                  backgroundColor: "#38BDF8",
+                  boxShadow: "0 0 6px rgba(56,189,248,0.6)",
+                }}
+              />
             </div>
             <div>
-              <p className="text-xs font-semibold text-[#22C55E] mb-0.5">
+              <p className="text-xs font-semibold mb-0.5" style={{ color: "#38BDF8" }}>
                 Available for Work
               </p>
               <p className="text-xs" style={{ color: "#52525B" }}>
-                Open to full-time & freelance. Replies within 24h.
+                Open to full-time &amp; freelance. Replies within 24h.
               </p>
             </div>
           </div>
@@ -175,7 +181,7 @@ export function Contact() {
               border: "1px solid rgba(255,255,255,0.08)",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.3)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(56,189,248,0.3)";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
@@ -183,9 +189,9 @@ export function Contact() {
           >
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-              style={{ backgroundColor: "rgba(99,102,241,0.15)" }}
+              style={{ backgroundColor: "rgba(56,189,248,0.15)" }}
             >
-              <Mail className="w-4 h-4" style={{ color: "#6366F1" }} />
+              <Mail className="w-4 h-4" style={{ color: "#38BDF8" }} />
             </div>
             <div className="min-w-0">
               <p className="text-xs text-[#52525B] mb-0.5">Email</p>
@@ -207,7 +213,7 @@ export function Contact() {
               border: "1px solid rgba(255,255,255,0.08)",
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.3)";
+              (e.currentTarget as HTMLElement).style.borderColor = "rgba(56,189,248,0.3)";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
@@ -260,7 +266,7 @@ export function Contact() {
           {/* Top gradient bar */}
           <div
             className="h-0.5 w-full"
-            style={{ background: "linear-gradient(90deg, #6366F1, #3B82F6, #06B6D4)" }}
+            style={{ background: "linear-gradient(90deg, #38BDF8, #0284C7, #06B6D4)" }}
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr]">
@@ -309,7 +315,7 @@ export function Contact() {
                       border: "1px solid rgba(255,255,255,0.08)",
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.4)";
+                      (e.currentTarget as HTMLElement).style.borderColor = "rgba(56,189,248,0.4)";
                     }}
                     onMouseLeave={(e) => {
                       (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
@@ -330,7 +336,7 @@ export function Contact() {
                     border: "1px solid rgba(255,255,255,0.08)",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(99,102,241,0.4)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(56,189,248,0.4)";
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
@@ -347,7 +353,7 @@ export function Contact() {
                     icon: <BellRing className="w-3.5 h-3.5 text-white" />,
                     title: "Instant notification",
                     sub: "I get alerted right away",
-                    color: "#6366F1",
+                    color: "#38BDF8",
                   },
                   {
                     icon: <MailCheck className="w-3.5 h-3.5 text-white" />,
@@ -412,7 +418,7 @@ export function Contact() {
                     onClick={() => setFormState("idle")}
                     className="px-7 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90"
                     style={{
-                      background: "linear-gradient(135deg, #6366F1, #818CF8)",
+                      background: "linear-gradient(135deg, #38BDF8, #0284C7)",
                     }}
                   >
                     Send Another Message
@@ -428,7 +434,7 @@ export function Contact() {
                         className="block text-xs font-semibold uppercase tracking-widest mb-2"
                         style={{ color: "#52525B" }}
                       >
-                        Full Name <span style={{ color: "#6366F1" }}>*</span>
+                        Full Name <span style={{ color: "#38BDF8" }}>*</span>
                       </label>
                       <input
                         id="c-name"
@@ -448,7 +454,7 @@ export function Contact() {
                         className="block text-xs font-semibold uppercase tracking-widest mb-2"
                         style={{ color: "#52525B" }}
                       >
-                        Email <span style={{ color: "#6366F1" }}>*</span>
+                        Email <span style={{ color: "#38BDF8" }}>*</span>
                       </label>
                       <input
                         id="c-email"
@@ -471,7 +477,7 @@ export function Contact() {
                       className="block text-xs font-semibold uppercase tracking-widest mb-2"
                       style={{ color: "#52525B" }}
                     >
-                      Subject <span style={{ color: "#6366F1" }}>*</span>
+                      Subject <span style={{ color: "#38BDF8" }}>*</span>
                     </label>
                     <input
                       id="c-subject"
@@ -493,7 +499,7 @@ export function Contact() {
                       className="block text-xs font-semibold uppercase tracking-widest mb-2"
                       style={{ color: "#52525B" }}
                     >
-                      Message <span style={{ color: "#6366F1" }}>*</span>
+                      Message <span style={{ color: "#38BDF8" }}>*</span>
                     </label>
                     <textarea
                       id="c-message"
@@ -537,8 +543,8 @@ export function Contact() {
                       disabled={formState === "sending"}
                       className="flex items-center gap-2 px-7 py-3 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{
-                        background: "linear-gradient(135deg, #6366F1, #818CF8)",
-                        boxShadow: "0 0 24px rgba(99,102,241,0.2)",
+                        background: "linear-gradient(135deg, #38BDF8, #0284C7)",
+                        boxShadow: "0 0 24px rgba(56,189,248,0.25)",
                       }}
                     >
                       {formState === "sending" ? (

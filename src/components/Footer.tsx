@@ -30,7 +30,7 @@ export function Footer() {
               <div
                 className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black text-white"
                 style={{
-                  background: "linear-gradient(135deg, #6366F1, #818CF8)",
+                  background: "linear-gradient(135deg, #38BDF8, #0284C7)",
                 }}
               >
                 OBY
