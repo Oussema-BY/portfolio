@@ -126,7 +126,7 @@ export function Footer() {
             color: "#3F3F46",
           }}
         >
-          <p>© 2025 Oussema Ben Yahia. All rights reserved.</p>
+          <p>© 2026 Oussema Ben Yahia. All rights reserved.</p>
           <p>Built with Next.js, TypeScript & Tailwind CSS</p>
         </div>
       </div>

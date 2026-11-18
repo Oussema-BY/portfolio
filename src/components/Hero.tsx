@@ -285,6 +285,7 @@ export function Hero() {
               lineHeight: 1.1,
             }}
           >
+            <span className="sr-only">Oussema Ben Yahia — Full-Stack Developer &amp; Software Engineer based in Tunisia. </span>
             <span className="block text-white mb-1.5 sm:mb-2">I BUILD DIGITAL PRODUCTS</span>
             <span className="block text-white mb-1.5 sm:mb-2">THAT SOLVE</span>
             <span className="block" style={{ color: "#6366F1" }}>

@@ -23,7 +23,7 @@ export default function Portfolio() {
       <Navigation />
 
       {/* Main content */}
-      <main>
+      <main aria-label="Oussema Ben Yahia — Full-Stack Developer Portfolio">
         {/* 01 — Hero */}
         <Hero />
 

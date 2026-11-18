@@ -336,7 +336,7 @@ function ProjectCard({
         >
           <Image
             src={project.image}
-            alt={project.title}
+            alt={`${project.title} — ${project.tagline} by Oussema Ben Yahia`}
             fill
             className="object-cover object-top transition-transform duration-500 hover:scale-105"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
